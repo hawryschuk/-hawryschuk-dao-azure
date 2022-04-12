@@ -1,0 +1,30 @@
+{
+  "name": "@hawryschuk/dao-azure",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Hawryschuk, Alexander",
+  "scripts": {
+    "hawryschuk": "npm link @hawryschuk/common @hawryschuk/dao",
+    "test": "ts-mocha *.spec.ts --timeout 200000",
+    "prestart": "npm run hawryschuk",
+    "start": "nodemon --ignore dist --ext ts --exec \"npm run build && npm run test\"",
+    "prebuild": "npm run hawryschuk && rm -rf dist/*",
+    "build": "tsc --outDir dist && cp config.js dist",
+    "postbuild": "hawryschuk --package-json"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "@azure/cosmos": "^3.6.2",
+    "rxjs": "^6.5.4"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.9",
+    "@types/mocha": "^7.0.1",
+    "chai": "^4.2.0",
+    "mocha": "^7.0.1",
+    "ts-mocha": "^6.0.0"
+  }
+}
